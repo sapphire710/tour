@@ -1,0 +1,150 @@
+<?php
+$gid = $_GET['gid'];
+require '../lib/db.php';
+$sql="select * from goods where gid='$gid'";
+$res = $mysql->query($sql)->fetch_all(MYSQLI_ASSOC);
+
+?>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/public.css">
+    <link rel="stylesheet" href="../static/css/xiangqing.css">
+
+</head>
+
+<?php foreach($res as $key=>$v){
+$banner = explode(',',$v['gbanner']);
+?>
+<!-- 头部结束 -->
+<!-- 轮播图开始 -->
+<div class="contsiner">
+    <div class="row">
+        <div class="banner col-lg-12">
+            <img src="../static/img/xiangqing/banner.jpg" alt="">
+        </div>
+    </div>
+</div>
+<!-- 轮播图结束 -->
+<!-- 大字开始 -->
+<div class="contsiner">
+    <div class="row">
+        <div class="hezi col-lg-12">
+            <div class="zi col-lg-12"><?php echo $v['gname']?></div>
+        </div>
+    </div>
+</div>
+<!-- 大字结束 -->
+<!-- 正文开始 -->
+<div class="contont ">
+    <div class="container">
+        <div class="row">
+
+            <div class="contont1">
+                <div class="kontont left col-lg-6 col-md-12 col-xs-12">
+                    <div class="left-kuang">
+                        <div class="img-box">
+                            <ul class="img-ul">
+                                <?php foreach($banner as $k=>$vv){ ?>
+                                <li class="tupian"><img style="border-radius: 10px" src="<?php echo $vv?>" alt=""></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+
+                        <div class="btn btn-left"></div>
+                        <div class="btn btn-right"></div>
+                        <!-- <div class="dot"> -->
+                        <div class="dot-dot">
+                            <div class="diandian"></div>
+                            <div class="diandian"></div>
+                            <div class="diandian"></div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+                <div class="kontont right col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="scj"> <span>市场价:￥<?php echo $v['gmprice']?></span></div>
+
+                    <div class="lsj"><span>零售价
+                            <stuly class="qwe">
+                                <strong style="color: red;">￥<?php echo $v['gsale']?></strong>
+                        </stuly>
+                        </span>
+                    </div>
+                    <div class="ls"><span>剩余票数：<?php echo $v['gstock']?></span></div>
+                </div>
+            </div>
+            <div class="goods col-md-12 col-sm-12 col-xs-12">
+                <div class="sp"><span>景点介绍</span></div>
+                <div class="sp1">
+                    <?php echo $v['gdetail']?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div style="width:100%;">
+    <div style="float: left;">上一篇：<?php echo $detailsstr1 ?></div>
+    <div style="float: right;">下一篇：<?php echo $detailsstr2 ?></div>
+</div>
+
+<?php } ?>
+<!-- 站点地图开始 -->
+<footer>
+    <ul>
+        <li>
+            <h1><strong>一店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+        <li>
+            <h1><strong>二店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+        <li>
+            <h1><strong>三店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+
+    </ul>
+    <div class="bottom-tb">
+        <img src="../static/img/common/QQ (1).png" alt="">
+        <img src="../static/img/common/微信 (1).png" alt="">
+        <img src="../static/img/common/微博 (1).png" alt="">
+        <img src="../static/img/common/电话 (1).png" alt="">
+        <img src="../static/img/common/邮箱.png" alt="">
+    </div>
+    <div class="bottom-wz">版权所有 2019-2020 聊之旅工作室 技术支持：WUIF</div>
+    <div class="bottom-zaixian"><a href="">在线预约</a></div>
+</footer>
+<!-- 站点地图结束 -->
+
+<!-- 箭头--置顶 -->
+<!--<div class="zhiding">ʌ</div>-->
+
+<body>
+
+</body>
+
+</html>
+<!--<script src="../static/js/xiangqing2.js"></script>-->
+<script src="../static/js/xiangqing.js"></script>

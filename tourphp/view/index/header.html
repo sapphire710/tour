@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/public.css">
+
+    <title>Document</title>
+</head>
+<body>
+<!-- 导航开始 -->
+<!-- 顶部导航 开始 -->
+<nav>
+    <div class="nav-box">
+        <div class="navl">
+            <img src="../static/img/common/车图标.png" alt="">
+        </div>
+        <ul class="navr">
+            <!--<a href="">
+                <li>
+                    首页
+                </li>
+            </a>-->
+            <?php   foreach($nav as $key => $value){ ?>
+            <a href="allpage.php?id=<?php echo $value['id']?>">
+                <li>
+                    <!--style="color:#777;width: 58px;margin: 0 25px 0 25px;"-->
+                    <?php echo $value['nname']?>
+                </li>
+            </a>
+            <?php   }   ?>
+            <!--<li class='aboutus zo' id="aboutus">
+                关于我们
+            </li>
+            <li class="center zo" id='center'>
+                景点中心
+            </li>
+            <li class="service zo" id='service'>
+                服务项目
+            </li>
+            <li class="news zo" id="news">
+                新闻资讯
+            </li>
+            <li class="zo" id="online">
+                在线预约
+            </li>-->
+        </ul>
+    </div>
+</nav>
+<!-- 顶部导航 结束 -->
+<!-- 屏幕滚动出现 开始 -->
+<nav class="xiala-nav" id="xia">
+    <div class="nav-box">
+        <div class="navl">
+            <img src="../static/img/common/车图标.png" alt="">
+        </div>
+        <ul class="navr navr2">
+            <<!--a href="">
+                <li>首页
+                </li>
+            </a>-->
+            <?php   foreach($nav as $key => $value){ ?>
+            <a href="allpage.php?id=<?php echo $value['id']?>">
+                <li style="color:#777;width: 58px;margin: 0 25px 0 25px;">
+                    <?php echo $value['nname']?>
+                </li>
+            </a>
+            <?php   }   ?>
+            <!--<li class='aboutus zo' id="aboutus1">
+                关于我们
+            </li>
+            <li class="center zo" id='center1'>
+                景点中心
+            </li>
+            <li class="service zo" id='service1'>
+                服务项目
+            </li>
+            <li class="news zo" id="news1">
+                新闻资讯
+            </li>
+            <li class="zo" id="online1">在线预约
+            </li>-->
+        </ul>
+    </div>
+</nav>
+<!-- 屏幕滚动出现 结束 -->
+<!-- 屏幕缩小后出现的下拉列表 开始 -->
+<a href="#">
+    <div class="nav-list">
+        <div class="shouy">首页</div>
+        <div class="shouy-xiala">∨</div>
+    </div>
+</a>
+<ul class="xialakuang" style="display: none;">
+    <!--<li>首页</li>-->
+    <?php   foreach($nav as $key => $value){ ?>
+    <a href="allpage.php?id=<?php echo $value['id']?>">
+        <li class="xiala-li">
+            <?php echo $value['nname']?>
+        </li>
+    </a>
+    <?php   }   ?>
+    <!--<li class='aboutus zo' id="aboutus0">关于我们</li>
+    <li class="center zo" id='center0'>景点中心</li>
+    <li class="service zo" id='service0'>服务项目</li>
+    <li class="news zo" id="news0">新闻资讯</li>
+    <li class="online zo" id="online0">在线预约</li>-->
+</ul>
+<!-- 屏幕缩小后出现的下拉列表 结束 -->
+
+<!-- 导航结束 -->
+
+<div class="zhiding">ʌ</div>
+
+</body>
+</html>
+
+<script src='../static/js/public.js'></script>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/onlineAppointment.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+<ol class="breadcrumb" style="background:#F8F8F8">
+    <li class="active" style="color:#a6acaf;">首页</li>
+    <li class="active" style="color:#a6acaf;">预约管理</li>
+    <li class="active" style="color:#a6acaf;">预约查看</li>
+    <li class="active" style="color:#dcdcdc;">预约修改</li>
+</ol>
+<div class="main-form" style="margin-top:100px;">
+    <form action=javascrip:;>
+
+        <div class="container ">
+            <div class="row form-box">
+                <div class="form-balank"></div>
+                <div class="form-content">
+                    <div class="form-font">
+                        <div class="form-left">
+                            预约服务：
+                        </div>
+                        <div class="form-list">
+                            <select name="service" id="service">
+                                <option value="境内游">境内游</option>
+                                <option value="境外游">境外游</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-font">
+                        <div class="form-left">
+                            预约日期：
+                        </div>
+                        <div class="form-list form-data">
+                            <select class="dat-year" name="datyear" id="datyear">
+                                <option value="<?php echo $datyear?>"><?php echo $datyear?></option>
+                            </select>
+                            <select class="dat-mouth" name="datmouth" id="datmouth">
+                                <option value="<?php echo $datmouth?>"><?php echo $datmouth?></option>
+                            </select>
+                            <select class="dat-data" name="datdata" id="datdata">
+                                <option value="<?php echo $datdate?>"><?php echo $datdate?></option>
+                            </select>
+                            <input type="date" id="data-img" class="data-img" style="border: none">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tishi">
+                        <div class="font-tishi data-font-tishi">
+                            ! 这是一个必填项哦
+                        </div>
+                    </div>
+                    <div class="form-font">
+                        <div class=" form-left">
+                            您的姓名：
+                        </div>
+                        <div class="form-list uese-name">
+                            <input class="uese-name uese-name1" value="<?php echo $res['oname'] ?>" name="oname" type="text" placeholder="请输入您的姓名">
+                        </div>
+                    </div>
+                    <div class="tishi" style="display: block">
+                        <div class="font-tishi name-font-tishi">
+                            ! 这是一个必填项哦
+                        </div>
+                    </div>
+                    <div class="form-font">
+                        <div class="form-left">
+                            您的性别：
+                        </div>
+                        <div class="form-list user-sex">
+                            <?php if($res['osex']==='男'){  ?>
+                            <input type="radio" name="osex" id="sex-nan" checked="checked" value="男"> <span>男</span>
+                            <input type="radio" name="osex" id="sex-nv"  value="女"><span>女</span>
+                            <?php }else if($res['osex']==='女'){ ?>
+                            <input type="radio" name="osex" id="sex-nan1" style="margin-right: 6px;" value="男"><span  style="margin-right: 6px;">男</span>
+                            <input type="radio" name="osex" id="sex-nv1" style="margin-right: 6px;" checked="checked" value="女"><span>女</span>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="tishi" style="display: block">
+                        <div class="font-tishi sex-font-tishi">
+                            ! 这是一个必填项哦
+                        </div>
+                    </div>
+                    <div class="form-font">
+                        <div class=" form-left">
+                            您的电话：
+                        </div>
+                        <div class="form-list uese-name">
+                            <input class="uese-name uese-phone" value="<?php echo $res['ophone'] ?>" type="number" name="ophone" placeholder="请输入您的手机号">
+                        </div>
+                    </div>
+                    <div class="tishi" style="display: block">
+                        <div class="font-tishi name-font-phone">
+                            ! 这是一个必填项哦
+                        </div>
+                    </div>
+                    <div class="form-font form-textarea">
+                        <div class="form-left">
+                            补充说明：
+                        </div>
+                        <div class="form-list uese-name">
+                            <textarea class="uese-name font-buchong" name="oshow" id=""  placeholder="补充内容"><?php echo $res['oshow'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="tishi" style="display: block">
+                        <div class="font-tishi buchong-font-tishi">
+                            ! 这是一个必填项哦
+                        </div>
+                    </div>
+
+                    <div class="form-font ">
+                        <div class="form-left main-user-submit">
+                            <input type="hidden" name="id" value="<?php echo $res['id']?>">
+                            <input type="submit" id="aaa" class="user-submit" value="提交" />
+                        </div>
+                        <div class="form-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-balank"></div>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
+<script>
+
+    //文件上传
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        //方法二提交：利用formdata
+        let formdata = new FormData(this);
+        // formdata.set('gbanner', formdata.get('gbanner').slice(0, -1));
+        $.ajax({
+            url: 'onlineupdate.php',
+            type: 'POST',
+            dataType: 'json',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                if (res.code === 200) {
+                    alert(res.msg);
+                    // this.reset();//this指向ajax的配置项所以的加context
+                } else {
+
+                }
+            }
+
+        })
+    })
+
+</script>
+<script src="../static/js/onlineAppointment.js"></script>

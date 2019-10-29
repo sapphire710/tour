@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+<ol class="breadcrumb" style="background:#F8F8F8">
+    <li class="active" style="color:#a6acaf;">首页</li>
+    <li class="active" style="color:#a6acaf;">景点管理</li>
+    <li class="active" style="color:#a6acaf;">景点查看</li>
+    <li class="active" style="color:#dcdcdc;">景点修改</li>
+</ol>
+<form id="myForm" name="myForm">
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">景点分类</label>
+        <select class="form-control" name="cid">
+           <?php
+                foreach($result as $value){
+                ?>
+            <option <?php echo $res['cid']==$value['num']?'selected':''; ?> value="<?php echo $value['id']; ?>">
+                    <?php echo $value['cname'] ?>
+            </option>
+            <?php
+            }
+            ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">景点项目名称</label>
+        <input type="text" value="<?php echo $res['gname']; ?>" name="gname" class="form-control" id="exampleInputEmail5" placeholder="景点名称">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">景点市场价</label>
+        <input type="text" value="<?php echo $res['gmprice']; ?>"  name="gmprice" class="form-control" id="exampleInputPassword1" placeholder="市场价">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">景点零售价</label>
+        <input type="number" value="<?php echo $res['gsale'] ?>" name="gsale" class="form-control" id="exampleInputEmail2" placeholder="零售价">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">剩余票数(库存)</label>
+        <input type="number" value="<?php echo $res['gstock'] ?>" name="gstock" required class="form-control" id="exampleInputPassword3" placeholder="剩余票数">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">景点详情介绍</label>
+        <textarea  name="gdetail" class="form-control" id="exampleInputPassword9" placeholder="景点详情介绍"><?php echo $res['gdetail'] ?></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">景点缩略图<span>(最佳:200*200)</span></label>
+        <input type="file" value="<?php echo $res['gthumb'] ?>" accept="image/*" class="form-control" id="exampleInputEmail1" placeholder="景点缩略图">
+    </div>
+
+    <div class="form-group">
+        <input type="hidden" value="<?php echo $res['gthumb'] ?>" name="gthumb">
+        <label for="exampleInputEmail1" style="visibility: hidden;">查看缩略图</label>
+        <img id="gthumb" src="<?php echo $res['gthumb'] ?>" width="200px">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">景点轮播图</label>
+        <input type="file" value="<?php echo $res['gbanner'] ?>"  multiple class="form-control" id="exampleInputEmail8" placeholder="景点轮播图">
+    </div>
+
+    <div class="form-group" id="gbanner">
+        <input type="hidden" value="<?php echo $res['gbanner'] ?>" name="gbanner" class="gbanner">
+        <label for="exampleInputEmail1" style="visibility: hidden;">查看轮播图</label>
+
+    </div>
+    <input type="hidden" name="gid" value="<?php echo $res['gid']?>">
+    <button type="submit" class="btn btn-default">添加</button>
+</form>
+</body>
+</html>
+<script>
+
+    $a=$('.gbanner').attr('value').split(',');
+    for(var i=0;i<$a.length;i++) {
+        $('<img>').appendTo('#gbanner').css('width', 200).attr('src',$a[i]);
+    }
+
+
+    //景点banner图（多图上传）
+    $('input[id=exampleInputEmail8]').on('change',function(){
+        let file = this.files;
+        for(let i=0;i<file.length;i++) {
+            let formdata = new FormData();
+            formdata.append('file', file[i]);
+            $.ajax({
+                url: 'upload.php',
+                type: 'post',//文件上传必须用post
+                dataType: 'json',
+                data: formdata,//传进去后是对象
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    // console.log(res);
+                    $('<img>').appendTo('#gbanner').attr('src',res.src).css('width',200);
+                    let gbannerinput = $('input[name=gbanner]');
+                    /* 格式一：gbannerinput.val(gbannerinput.val()+res.src+',');*/
+                    /* 格式二：gbannerinput.val(function(index,value){
+                         return value+res.src+',';
+                     })*/
+                    //格式三：
+                    gbannerinput.val((index,value)=>value+res.src+',');
+
+
+                }
+            })
+        }
+    })
+
+    //景点缩略图（单图）
+    $('input[id=exampleInputEmail1]').on('change',function(){
+        let file = this.files[0];
+        //前台预览
+        $('#gthumb').attr('src',URL.createObjectURL(file));//第一种方法
+        /*  第二种方法：
+        let filereader =new FileReader();
+        filereader.readAsDataURL(file); //读文件，base64格式
+        filereader.onload=function (ev) {
+            console.log(ev);
+            $('#gthumb').attr('src',ev.currentTarget.result);
+        }  */
+        let formdata = new FormData();
+        formdata.append('file',file);
+
+        //同步的方式写异步
+        let promise = new Promise(function(resolve,reject){//封装了一个异步操作
+            $.ajax({
+                url:'upload.php',
+                type:'post',//文件上传必须用post
+                dataType:'json',
+                data:formdata,//传进去后是对象
+                processData:false,
+                contentType:false,
+                success:function(res) {
+                    // console.log(res);
+                    if(res.code == 200){
+                        resolve(res);//成功之后
+                    }else{
+                        reject(res);//失败之后
+                    }
+                }
+            })
+        });
+        promise.then(function(res){
+            //成功、结果传给resolve
+            $('#gthumb').attr('src',res.src);
+            $('input[name=gthumb]').val(res.src);
+        },function(){
+            //失败、结果传给reject
+        })
+
+
+        /* $.ajax({
+             url:'upload.php',
+             type:'post',//文件上传必须用post
+             dataType:'json',
+             data:formdata,//传进去后是对象
+             processData:false,
+             contentType:false,
+             success:function(res) {
+                     // console.log(res);
+                     $('#gthumb').attr('src', res.src);
+                     $('input[name=gthumb]').val(res.src);
+             }
+         })*/
+    });
+
+    //文件上传
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        //方法二提交：利用formdata
+        let formdata = new FormData(this);
+        // formdata.set('gbanner', formdata.get('gbanner').slice(0, -1));
+        $.ajax({
+            url: 'goodsupdate.php',
+            type: 'POST',
+            dataType: 'json',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                if (res.code === 200) {
+                    alert('插入成功');
+                    // this.reset();//this指向ajax的配置项所以的加context
+                } else {
+
+                }
+            }
+
+        })
+    })
+
+</script>

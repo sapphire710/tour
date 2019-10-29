@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>景点分类</title>
+</head>
+<body>
+<ol class="breadcrumb" style="background:#F8F8F8">
+    <li class="active" style="color:#a6acaf;">首页</li>
+    <li class="active" style="color:#a6acaf;">景点分类</li>
+    <li class="active" style="color:#dcdcdc;">分类添加</li>
+</ol>
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">分类编号</label>
+        <input type="number" name="num" class="form-control" id="exampleInputEmail1" placeholder="分类编号">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">分类名称</label>
+        <input type="text" name="cname" class="form-control" id="exampleInputPassword1" placeholder="分类名称">
+    </div>
+
+    <button type="submit" class="btn btn-default">添加</button>
+</form>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        let qs = $(this).serialize();
+        $.ajax({
+            url: 'cateinsert.php',
+            type: 'POST',
+            dataType: 'json',
+            data: qs,
+            context: this,
+            success: function (res) {
+                if (res.code === 200) {
+                    this.reset();//this指向ajax的配置项所以的加context
+                } else {
+
+                }
+            }
+
+        })
+    })
+
+</script>

@@ -1,0 +1,123 @@
+<?php
+$id = $_GET['id'];
+
+require '../lib/db.php';
+$news="select * from news where id=$id";
+$res = $mysql->query($news)->fetch_assoc();
+
+?>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新闻资讯</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/public.css">
+    <link rel="stylesheet" href="../static/css/news.css">
+</head>
+
+<body>
+
+<!-- 顶部导航 开始 -->
+<div class="container">
+    <div class="row">
+        <!-- banner开始 -->
+        <div class="banner-img">
+            <img src="../static/img/news/banner.jpg" alt="">
+        </div>
+        <!-- banner结束 -->
+        <!-- 分割线开始 -->
+        <div class="aboutus">
+            <div class='line'></div>
+            <div class="guanyu">
+                <div class="zhongwen">出行贴士</div>
+                <div class="yingwen">Tip</div>
+            </div>
+            <div class="line"></div>
+        </div>
+        <!-- 分割线结束 -->
+        <!-- 新闻开始 -->
+
+
+
+            <!-- 隐藏页开始 -->
+
+            <div class="hidden-news" style="display: block;">
+
+                <h2><?php echo $res['ntitle'] ?></h2>
+                <div class="fabusj"><?php echo $res['nname'] ?>：<?php echo $res['create_time'] ?></div>
+                <p>
+                    <?php echo $res['ncontent'] ?>
+                </p>
+
+
+                <div style="width:100%;">
+                    <div style="float: left;">上一篇：<?php echo $detailsstr1?></div>
+                    <div style="float: right;">下一篇：<?php echo $detailsstr2?></div>
+                </div>
+
+
+            </div>
+
+
+
+
+        <!-- 隐藏页结束 -->
+        <!-- 底部图片开始 -->
+        <div class="container bottom">
+            <div class="banner-img">
+                <img src="../static/img/news/dibu-imgjpg.jpg" alt="">
+            </div>
+        </div>
+        <!-- 底部图片结束 -->
+    </div>
+</div>
+<!-- 站点地图开始 -->
+<footer>
+    <ul>
+        <li>
+            <h1><strong>一店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+        <li>
+            <h1><strong>二店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+        <li>
+            <h1><strong>三店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+
+    </ul>
+    <div class="bottom-tb">
+        <img src="../static/img/common/QQ (1).png" alt="">
+        <img src="../static/img/common/微信 (1).png" alt="">
+        <img src="../static/img/common/微博 (1).png" alt="">
+        <img src="../static/img/common/电话 (1).png" alt="">
+        <img src="../static/img/common/邮箱.png" alt="">
+    </div>
+    <div class="bottom-wz">版权所有 2019-2020 聊之旅工作室 技术支持：WUIF</div>
+    <div class="bottom-zaixian"><a href="">在线预约</a></div>
+</footer>
+<!-- 站点地图结束 -->
+
+
+</body>
+
+</html>
+<script>
+</script>
